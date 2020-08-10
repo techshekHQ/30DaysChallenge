@@ -1,0 +1,23 @@
+{
+  "name": "30dayschallenge",
+  "version": "1.0.0",
+  "description": "- Only people who win 30 Days Challenge can join our community. - To participate , people pay 50 USD up front - Non Refundable.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techshekHQ/30DaysChallenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/techshekHQ/30DaysChallenge/issues"
+  },
+  "homepage": "https://github.com/techshekHQ/30DaysChallenge#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1"
+  }
+}
