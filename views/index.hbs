@@ -32,7 +32,12 @@
 
     .card {
       padding: 1.5rem;
-      border: 1px solid rgba(0,0,0,0.07);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .card:hover {
+      cursor: pointer;
+      margin-top: -10px;
     }
 
     .card>img {
@@ -46,6 +51,55 @@
 
     .card>h1 {
       font-size: 1.2rem;
+    }
+
+    .btn-payment {
+      background-color: #ff5623;
+      border-color: #ff5523;
+      padding: 5px 13px;
+      color: white;
+      font-weight: bold;
+      box-shadow: none;
+      display: block;
+    }
+
+    .modal li {
+      font-size: 1.2rem;
+      margin: 0;
+      margin: auto;
+      margin-left: -22px;
+      line-height: 1.7;
+      color: slategrey;
+    }
+
+    .modal h5 {
+      font-weight: bold;
+      font-size: 2.25rem;
+    }
+
+    .modal-header {}
+
+    .modal .close {
+      color: red;
+      opacity: 1;
+      z-index: 10;
+      padding-top: 28px;
+      padding-right: 22px;
+    }
+
+    input {
+      border: 0px;
+      padding: 9px 8px;
+      width: 100%;
+      box-sizing: border-box;
+      background: #f0f0f0;
+    }
+
+    li>span {
+      background: #ededed;
+      color: black;
+      padding: 0 6px;
+      display: inline-block;
     }
 
     @media (max-width: 1200px) {
@@ -75,39 +129,65 @@
 
     <div class="grid">
 
-      <div class="card" onclick="window.location.assign('/payment')">
+      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
         <img src="/smoke.svg" alt="">
         <h1>I want to quit smoking</h1>
       </div>
 
-      <div class="card">
+      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
         <img src="/sajadah.svg" alt="">
         <h1>I want to start 5 times prayers</h1>
       </div>
 
-      <div class="card">
+      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
         <img src="/muscle.svg" alt="">
         <h1>I want to get fit</h1>
       </div>
 
-      <div class="card">
+      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
         <img src="/homework.svg" alt="">
         <h1>I want to gain focus (Deep Work)</h1>
       </div>
 
-      <div class="card">
+      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
         <img src="/html.svg" alt="">
         <h1>I want to code for 1 hour everyday</h1>
       </div>
 
-      <div class="card">
+      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
         <img src="/calm.svg" alt="">
         <h1>I want to recite Quran & find contentment</h1>
       </div>
 
-      <div class="card">
+      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
         <img src="/sun.svg" alt="">
         <h1>I want to control my anger</h1>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Please note !</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>Make 50 USD payment to <span>start</span> this challenge and <span>join</span> our community of dreamers.</li>
+              <li>After you win the challenge, you will be given <span>1 year</span> 50 USD worth of subscription.</li>
+              <li>The payment is <span>non-refundable</span>. So please make up your mind before taking this challenge.</li>
+            </ul>
+            <input type="text" name="" value="" placeholder="Write down your password for future logins.">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-payment" id="submit" disabled>Pay 50 USD</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -118,6 +198,68 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <!-- <script src="./script.js" defer></script> -->
+  <!-- Load translation files and libraries. -->
+  <script src="https://unpkg.com/i18next/i18next.js"></script>
+  <script src="https://unpkg.com/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.js"></script>
+  <script src="./translation.js" defer></script>
+
+  <script type="text/javascript">
+
+    /* Handle any errors returns from Checkout  */
+    var handleResult = function(result) {
+      if (result.error) {
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    };
+
+    // Create a Checkout Session with the selected quantity
+    var createCheckoutSession = function() {
+      var inputEl = document.getElementById('quantity-input');
+      var quantity = 1;
+
+      return fetch('/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quantity: quantity,
+          locale: 'en',
+        }),
+      }).then(function(result) {
+        $('#submit').html('Going forward ...')
+        return result.json();
+      });
+    };
+
+    /* Get your Stripe publishable key to initialize Stripe.js */
+    fetch('/config')
+      .then(function(result) {
+        return result.json();
+      })
+      .then(function(json) {
+        $('#submit').attr({disabled: false});
+        window.config = json;
+        var stripe = Stripe(config.publicKey);
+        // Setup event handler to create a Checkout Session on submit
+        document.querySelector('#submit').addEventListener('click', function(evt) {
+          $('#submit').html('Creating Checkout Session ...');
+          createCheckoutSession().then(function(data) {
+            $('#submit').html('Redirecting to Secure Checkout ...')
+            stripe
+              .redirectToCheckout({
+                sessionId: data.sessionId,
+              })
+              .then(handleResult);
+          });
+        });
+      });
+  </script>
 </body>
 
 </html>
