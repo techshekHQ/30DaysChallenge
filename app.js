@@ -33,6 +33,14 @@ app.get('/success', (req, res) => {
   res.status(200).render('success.hbs');
 })
 
+app.get('/challenge', (req, res) => {
+  let box = [];
+  for (var i = 1; i < 31; i++) {
+    box.push({number: i});
+  }
+  res.status(200).render('challenge.hbs',{box});
+})
+
 app.get('/config', async (req, res) => {
   const price = await stripe.prices.retrieve(process.env.PRICE);
 
