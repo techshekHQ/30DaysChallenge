@@ -8,6 +8,7 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
   <style media="screen">
     .grid {
       display: flex;
@@ -34,7 +35,7 @@
       border: 1px solid transparent;
     }
 
-    .card:hover {
+    .card:not(.locked):hover {
       background: lightcoral;
       color: white;
       cursor: pointer;
@@ -46,8 +47,14 @@
       box-sizing: border-box;
       border: 0px solid transparent;
       padding: 10px;
-      font-size: 1.2rem;
+      font-size: 2.2rem;
       background: #f0807f17;
+      font-family: 'Josefin Sans', sans-serif;
+      color: indianred;
+    }
+
+    textarea:focus {
+      outline: 0px solid transparent;
     }
 
     .emojis {
@@ -98,6 +105,62 @@
       border-top: 0px solid #e9ecef;
     }
 
+    img.selected {
+      opacity: 0.2;
+    }
+
+    .card.feeling-1 {
+      /* background: #ffdede; */
+    }
+
+    .card.feeling-2 {
+      /* background: #e8f9e9; */
+    }
+
+    .card.feeling-3 {
+      /* background: #fff7c1; */
+    }
+
+    .card.feeling-4 {
+      /* background: #fffbdf; */
+    }
+
+    .card.feeling-5 {
+      /* background: darkcyan; */
+    }
+
+    .card.locked img {
+      width: 55%;
+      opacity: 1;
+      max-width: 110px;
+    }
+
+    .card.locked.future img {
+      display: none;
+    }
+
+    .card.locked.future:hover img {
+      display: block;
+    }
+
+    .card.locked.future p {
+      display: block;
+    }
+
+    .card.locked.future:hover p {
+      display: none;
+    }
+
+    .card.locked.past p {
+      width: 31px;
+      height: 31px;
+      background: lavenderblush;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     @media (max-width: 1272px) {
       .grid {
         grid-template-columns: repeat(5, 1fr);
@@ -139,9 +202,32 @@
 <body>
   <div class="grid">
     {{#each box}}
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
-        <p>{{this.number}}</p>
-      </div>
+
+      {{#if this.past}}
+
+        <div class="card locked past feeling-{{this.feelingType}}">
+          <p>{{this.number}}</p>
+          <img src="{{this.feeling}}" alt="" data-linked="{{this.comment}}">
+        </div>
+
+      {{/if}}
+
+      {{#if this.present}}
+
+        <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+          <p>{{this.number}}</p>
+        </div>
+
+      {{/if}}
+
+      {{#if this.future}}
+
+        <div class="card locked future">
+          <img src="/emojis/padlock.svg" alt="">
+          <p>{{this.number}}</p>
+        </div>
+
+      {{/if}}
     {{/each}}
   </div>
 
@@ -157,7 +243,7 @@
             <img src="/emojis/happy.svg" alt="happy" data-linked="I am Happy">
             <img src="/emojis/flow.svg" alt="flow" data-linked="In the Flow">
           </div>
-          <textarea name="name" rows="8" cols="80" placeholder="enter your today's feelings here..."></textarea>
+          <textarea name="name" rows="6" cols="80" placeholder="enter your today's feelings here..."></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-close" data-dismiss="modal">Close</button>
@@ -173,14 +259,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script type="text/javascript">
-    $(document).on('mouseenter mouseleave','.modal img',function() {
-      console.log('hello');
+    $(document).on('mouseenter mouseleave', '.modal img', function() {
       var text = $(this).attr('data-linked');
       $('.modal h5').text(text);
     })
 
-    $(document).on('mouseleave','.modal .emojis',function() {
+    $(document).on('mouseleave', '.modal .emojis', function() {
+      console.log($('img.active'));
+      if ($('img.selected').length > 0) {
+        var text = $('img.active').attr('data-linked');
+        console.log(text);
+        $('.modal h5').text(text);
+        return;
+      };
       $('.modal h5').text('Log your Day.');
+    })
+
+    $(document).on('click', '.modal img', function() {
+      $('img').addClass('selected').removeClass('active');
+      $(this).removeClass('selected').addClass('active');
+      var text = $(this).attr('data-linked');
+      $('.modal h5').text(text);
     })
   </script>
 </body>

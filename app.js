@@ -36,9 +36,81 @@ app.get('/success', (req, res) => {
 app.get('/challenge', (req, res) => {
   let box = [];
   for (var i = 1; i < 31; i++) {
-    box.push({number: i});
+    switch (true) {
+      case i == 1:
+        box.push({
+          number: i,
+          past: 'true',
+          locked: 'true',
+          logged: 'true',
+          feelingType: 1,
+          feeling: '/emojis/depressed.svg',
+          comments: 'I am feeling kind of happy today. Let`s see till what point can I get moving'
+        })
+        break;
+      case i == 2:
+        box.push({
+          number: i,
+          past: 'true',
+          locked: 'true',
+          logged: 'true',
+          feelingType: 2,
+          feeling: '/emojis/exhausted.svg',
+          comments: 'I am feeling kind of happy today. Let`s see till what point can I get moving'
+        })
+        break;
+      case i == 3:
+        box.push({
+          number: i,
+          past: 'true',
+          locked: 'true',
+          logged: 'true',
+          feelingType: 3,
+          feeling: '/emojis/bored.svg',
+          comments: 'I am feeling kind of happy today. Let`s see till what point can I get moving'
+        })
+        break;
+      case i == 4:
+        box.push({
+          number: i,
+          past: 'true',
+          locked: 'true',
+          logged: 'true',
+          feelingType: 4,
+          feeling: '/emojis/happy.svg',
+          comments: 'I am feeling kind of happy today. Let`s see till what point can I get moving'
+        })
+        break;
+      case i == 5:
+        box.push({
+          number: i,
+          past: 'true',
+          locked: 'true',
+          logged: 'true',
+          feelingType: 5,
+          feeling: '/emojis/flow.svg',
+          comments: 'I am feeling kind of happy today. Let`s see till what point can I get moving'
+        })
+        break;
+      case i == 6:
+        box.push({
+          number: i,
+          present: 'true',
+          locked:'false'
+        })
+        break;
+      default:
+        box.push({
+          number: i,
+          future: 'true',
+          locked:'true'
+        });
+    }
+
   }
-  res.status(200).render('challenge.hbs',{box});
+  res.status(200).render('challenge.hbs', {
+    box
+  });
 })
 
 app.get('/config', async (req, res) => {
