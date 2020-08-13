@@ -181,7 +181,7 @@
               <li>After you win the challenge, you will be given <span>1 year</span> 50 USD worth of subscription.</li>
               <li>The payment is <span>non-refundable</span>. So please make up your mind before taking this challenge.</li>
             </ul>
-            <input type="text" name="" value="" placeholder="Write down your password for future logins.">
+            <input id="userInput" type="password" name="" value="" placeholder="Write down your password for future logins.">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -221,6 +221,9 @@
     var createCheckoutSession = function() {
       var inputEl = document.getElementById('quantity-input');
       var quantity = 1;
+      var userInput = $('#userInput').val();
+
+      if (userInput.length < 3) return $('#submit').html('⚠️ Password is required.');
 
       return fetch('/create-checkout-session', {
         method: 'POST',
@@ -230,6 +233,7 @@
         body: JSON.stringify({
           quantity: quantity,
           locale: 'en',
+          userInput: userInput
         }),
       }).then(function(result) {
         $('#submit').html('Going forward ...')

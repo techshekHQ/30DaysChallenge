@@ -1,9 +1,13 @@
 const express = require('express');
 const hbs = require('hbs');
 const app = express();
-const { resolve } = require('path');
+const {
+  resolve
+} = require('path');
 // Copy the .env.example in the root into a .env file in this folder
-require('dotenv').config({ path: './.env' });
+require('dotenv').config({
+  path: './.env'
+});
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 app.use(express.static(process.env.STATIC_DIR));
@@ -11,7 +15,7 @@ app.use(
   express.json({
     // We need the raw body to verify webhook signatures.
     // Let's compute it only when hitting the Stripe webhook endpoint.
-    verify: function (req, res, buf) {
+    verify: function(req, res, buf) {
       if (req.originalUrl.startsWith('/webhook')) {
         req.rawBody = buf.toString();
       }
@@ -25,6 +29,10 @@ app.get('/', (req, res) => {
   res.status(200).render('index.hbs')
 });
 
+app.get('/success', (req, res) => {
+  res.status(200).render('success.hbs');
+})
+
 app.get('/config', async (req, res) => {
   const price = await stripe.prices.retrieve(process.env.PRICE);
 
@@ -35,13 +43,15 @@ app.get('/config', async (req, res) => {
   });
 });
 
-app.get('/checkout', (req,res) => {
+app.get('/checkout', (req, res) => {
   res.status(200).render('checkout.hbs');
 })
 
 // Fetch the Checkout Session to display the JSON result on the success page
 app.get('/checkout-session', async (req, res) => {
-  const { sessionId } = req.query;
+  const {
+    sessionId
+  } = req.query;
   const session = await stripe.checkout.sessions.retrieve(sessionId);
   res.send(session);
 });
@@ -49,7 +59,12 @@ app.get('/checkout-session', async (req, res) => {
 app.post('/create-checkout-session', async (req, res) => {
   const domainURL = process.env.DOMAIN;
 
-  const { quantity, locale } = req.body;
+  const {
+    quantity,
+    locale,
+    userInput
+  } = req.body;
+  console.log(userInput);
   // Create new Checkout Session for the order
   // Other optional params include:
   // [billing_address_collection] - to display billing address details on the page
@@ -60,14 +75,17 @@ app.post('/create-checkout-session', async (req, res) => {
     payment_method_types: process.env.PAYMENT_METHODS.split(', '),
     mode: 'payment',
     locale: locale,
-    line_items: [
-      {
-        price: process.env.PRICE,
-        quantity: quantity
-      },
-    ],
+    line_items: [{
+      price: process.env.PRICE,
+      quantity: quantity
+    }],
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-    success_url: `${domainURL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+    payment_intent_data: {
+      metadata: {
+        userInput: userInput
+      },
+    },
+    success_url: `${domainURL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${domainURL}/`,
   });
 
