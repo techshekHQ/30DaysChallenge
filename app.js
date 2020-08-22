@@ -8,7 +8,9 @@ const {
 require('dotenv').config({
   path: './.env'
 });
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 
 app.use(express.static(process.env.STATIC_DIR));
 app.use(
@@ -23,9 +25,9 @@ app.use(
   })
 );
 
+hbs.registerPartials(__dirname + '/views/partials');
+
 app.get('/', (req, res) => {
-  // const path = resolve(process.env.STATIC_DIR + '/index.html');
-  // res.sendFile(path);
   res.status(200).render('index.hbs')
 });
 
@@ -111,6 +113,14 @@ app.get('/challenge', (req, res) => {
   res.status(200).render('challenge.hbs', {
     box
   });
+})
+
+app.get('/challenges', (req,res) => {
+  res.status(200).render('challenges.hbs');
+})
+
+app.get('/profile', (req,res) => {
+  res.status(200).render('profile.hbs');
 })
 
 app.get('/config', async (req, res) => {

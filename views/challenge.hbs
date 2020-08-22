@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
   <style media="screen">
-    .grid {
+    .box-grid {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,7 +21,7 @@
       height: 100vh;
     }
 
-    .card {
+    .box-grid .card {
       height: 100%;
       font-size: 7rem;
       font-weight: bold;
@@ -35,7 +35,7 @@
       border: 1px solid transparent;
     }
 
-    .card:not(.locked):hover {
+    .box-grid .card:not(.locked):hover {
       background: lightcoral;
       color: white;
       cursor: pointer;
@@ -73,22 +73,6 @@
       font-size: 3.25rem;
       font-weight: bolder;
       color: lightcoral;
-    }
-
-    .btn-submit {
-      color: #fff;
-      background-color: #f0807f;
-      border-color: #f0807f;
-    }
-
-    .btn:hover {
-      opacity: 0.6;
-    }
-
-    .btn-close {
-      color: #f0807e;
-      background-color: #fdf4f4;
-      border-color: #fdf4f4;
     }
 
     .modal img:hover {
@@ -162,36 +146,36 @@
     }
 
     @media (max-width: 1272px) {
-      .grid {
+      .box-grid {
         grid-template-columns: repeat(5, 1fr);
         height: auto;
       }
 
-      .card {
+      .box-grid .card {
         height: 272px;
         min-width: 200px;
       }
     }
 
     @media (max-width: 1000px) {
-      .grid {
+      .box-grid {
         grid-template-columns: repeat(4, 1fr);
       }
 
-      .card {
+      .box-grid .card {
         height: 200px;
         min-width: 200px;
       }
     }
 
     @media (max-width: 800px) {
-      .grid {
+      .box-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (max-width: 600px) {
-      .grid {
+      .box-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -200,7 +184,10 @@
 </head>
 
 <body>
-  <div class="grid">
+
+  {{> menu}}
+
+  <div class="box-grid">
     {{#each box}}
 
       {{#if this.past}}

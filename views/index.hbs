@@ -15,8 +15,8 @@
       line-height: 1.2;
       margin-bottom: 2rem;
 
-      background: #FF5722;
-      font-size: 2.5rem;
+      background: lightcoral;
+      font-size: 3rem;
       padding: 20px;
       color: white;
       font-weight: bold;
@@ -29,7 +29,7 @@
       border: 1px solid white;
       display: inline-block;
       background: white;
-      color: #ff5623;
+      color: lightcoral;
     }
 
     .display-2 .btn-normal {
@@ -37,14 +37,14 @@
       padding: 11px 9px;
       border: 1px solid white;
       display: inline-block;
-      background: #ff5623;
+      background: lightcoral;
       color: white;
     }
 
     .grid {
       display: grid;
       grid-template-rows: auto;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: repeat(auto-fill,minmax(175px,1fr));
       grid-gap: 3px;
     }
 
@@ -55,7 +55,7 @@
 
     .card:hover {
       cursor: pointer;
-      margin-top: -10px;
+      opacity: 0.6;
     }
 
     .card>img {
@@ -72,8 +72,8 @@
     }
 
     .btn-payment {
-      background-color: #ff5623;
-      border-color: #ff5523;
+      background-color: lightcoral;
+      border-color: lightcoral;
       padding: 5px 13px;
       color: white;
       font-weight: bold;
@@ -120,7 +120,7 @@
       display: inline-block;
     }
 
-    @media (max-width: 1200px) {
+    /* @media (max-width: 1200px) {
       .grid {
         grid-template-columns: 1fr 1fr 1fr 1fr;
       }
@@ -135,13 +135,15 @@
     @media (max-width: 579px) {
       .grid {
         grid-template-columns: 1fr 1fr;
-      }
+      } */
     }
   </style>
   <title>Hello, world!</title>
 </head>
 
 <body>
+
+  {{> menu}}
 
   <div class="container pt-4">
 

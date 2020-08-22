@@ -1,0 +1,179 @@
+<style media="screen">
+  .menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    padding: 0 20px;
+  }
+
+  .menu {
+    padding-top: 1.5rem;
+    width: 100%;
+    max-width: 720px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .menu .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+
+  .menu .card {
+    padding-bottom: 1rem;
+  }
+
+  .menu img {
+    margin-bottom: 1rem;
+    background: lavenderblush;
+    padding: 2rem;
+    width: 100%;
+    height: 160px;
+    opacity: 0.7;
+  }
+
+  .menu .card>*:not(img) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .menu h5 {
+    font-size: 1.7rem;
+    color: lightcoral;
+    font-weight: bold;
+  }
+
+  .menu small {
+    font-size: 93%;
+    font-weight: 400;
+    color: dimgray;
+  }
+
+  .menu .card:hover {
+    background: lightcoral;
+    cursor: pointer;
+  }
+
+  .menu .card:hover h5,
+  .menu .card:hover small {
+    color: white;
+  }
+
+  .menu button {
+    /* display: inline-block; */
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: fit-content;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: lightcoral;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: none;
+    opacity: 0.6;
+  }
+
+  .btn-submit {
+    color: #fff;
+    background-color: #f0807f;
+    border-color: #f0807f;
+  }
+
+  .btn:hover {
+    opacity: 0.6;
+  }
+
+  .btn-close {
+    color: #f0807e;
+    background-color: #fdf4f4;
+    border-color: #fdf4f4;
+  }
+
+  .menu-btn.btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 5;
+    box-shadow: 0px 0px 5px brown;
+  }
+
+  .card.special {
+    color: white;
+    background: lightcoral;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+</style>
+
+<button class="menu-btn btn btn-submit" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">Menu</button>
+
+<div class="menu-container d-none">
+
+  <div class="menu">
+
+    <!-- <div class="grid">
+      <div class="card">
+        <img src="/sun.svg" alt="">
+        <h5>Profile</h5>
+        <small>Update your name, email or password</small>
+      </div>
+
+      <div class="card">
+        <img src="/html.svg" alt="">
+        <h5>Purchases</h5>
+        <small>Update / view your purchases / subscriptions made to techshek</small>
+      </div>
+
+      <div class="card">
+        <img src="/sajadah.svg" alt="">
+        <h5>Payments</h5>
+        <small>Update your payment methods / credit card details</small>
+      </div>
+
+      <div class="card">
+        <img src="/calm.svg" alt="">
+        <h5>Community</h5>
+        <small>Socialize with people of products</small>
+      </div>
+
+      <div class="card">
+        <img src="/muscle.svg" alt="">
+        <h5>Challenges</h5>
+        <small>View your 30 Days Challenges / Log your activity</small>
+      </div>
+
+      <div class="card">
+        <img src="/homework.svg" alt="">
+        <h5>Event</h5>
+        <small>Our next event is planned on 6 September 2020 · Your ticket is purchased !</small>
+      </div>
+
+    </div> -->
+
+    <h1><a href="/">Home</a> </h1>
+    <h1><a href="/profile">Profile</a> </h1>
+    <h1><a href="/challenges">Challenges</a> </h1>
+    <h1><a href="#">Log Out</a> </h1>
+    <!-- <h1 onclick="$('.menu-container').toggleClass('d-none')"><a href="#">Close Menu</a> </h1> -->
+
+
+    <button class="btn btn-close" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">Close Menu</button>
+
+  </div>
+
+</div>
