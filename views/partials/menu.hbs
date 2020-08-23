@@ -31,14 +31,15 @@
     padding-bottom: 1rem;
   }
 
-  .menu img {
+  /* .menu img {
     margin-bottom: 1rem;
     background: lavenderblush;
     padding: 2rem;
     width: 100%;
     height: 160px;
     opacity: 0.7;
-  }
+  } */
+
 
   .menu .card>*:not(img) {
     padding-left: 10px;
@@ -103,12 +104,18 @@
     border-color: #fdf4f4;
   }
 
-  .menu-btn.btn {
+  .menu-btn.btn, .menu .btn-close {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
     z-index: 5;
     box-shadow: 0px 0px 5px brown;
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card.special {
@@ -118,9 +125,20 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
+  .card.special h1 {
+    font-size: 2.5rem;
+    font-weight: bolder;
+  }
+
+  .card.special p {
+    /* font-size: 1.3rem; */
+  }
 </style>
 
-<button class="menu-btn btn btn-submit" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">Menu</button>
+<button class="menu-btn btn btn-submit" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">
+  <img src="/menu.svg" alt="">
+</button>
 
 <div class="menu-container d-none">
 
@@ -172,7 +190,9 @@
     <!-- <h1 onclick="$('.menu-container').toggleClass('d-none')"><a href="#">Close Menu</a> </h1> -->
 
 
-    <button class="btn btn-close" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">Close Menu</button>
+    <button class="btn btn-close" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">
+      <img src="/close.svg" alt="">
+    </button>
 
   </div>
 

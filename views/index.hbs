@@ -44,7 +44,7 @@
     .grid {
       display: grid;
       grid-template-rows: auto;
-      grid-template-columns: repeat(auto-fill,minmax(175px,1fr));
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
       grid-gap: 3px;
     }
 
@@ -154,68 +154,62 @@
 
     <div class="grid">
 
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+      <div class="card" data-toggle="" data-target="#staticBackdrop">
         <img src="/smoke.svg" alt="">
         <h1>I want to quit smoking</h1>
       </div>
 
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+      <div class="card" data-toggle="" data-target="#staticBackdrop">
         <img src="/sajadah.svg" alt="">
         <h1>I want to start 5 times prayers</h1>
       </div>
 
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+      <div class="card" data-toggle="" data-target="#staticBackdrop">
         <img src="/muscle.svg" alt="">
         <h1>I want to get fit</h1>
       </div>
 
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+      <div class="card" data-toggle="" data-target="#staticBackdrop">
         <img src="/homework.svg" alt="">
         <h1>I want to gain focus (Deep Work)</h1>
       </div>
 
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+      <div class="card" data-toggle="" data-target="#staticBackdrop">
         <img src="/html.svg" alt="">
         <h1>I want to code for 1 hour everyday</h1>
       </div>
 
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+      <div class="card" data-toggle="" data-target="#staticBackdrop">
         <img src="/calm.svg" alt="">
         <h1>I want to recite Quran & find contentment</h1>
       </div>
 
-      <div class="card" data-toggle="modal" data-target="#staticBackdrop">
+      <div class="card" data-toggle="" data-target="#staticBackdrop">
         <img src="/sun.svg" alt="">
         <h1>I want to control my anger</h1>
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Please note !</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <ul>
-              <li>Make 50 USD payment to <span>start</span> this challenge and <span>join</span> our community of dreamers.</li>
-              <li>After you win the challenge, you will be given <span>1 year</span> 50 USD worth of subscription.</li>
-              <li>The payment is <span>non-refundable</span>. So please make up your mind before taking this challenge.</li>
-            </ul>
-            <input id="userInput" type="password" name="" value="" placeholder="Write down your password for future logins.">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-payment" id="submit" disabled>Pay 50 USD</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 
+  <style media="screen">
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      font-weight: bold;
+      flex-direction: column;
+    }
+  </style>
+
+  <div class="overlay d-none">
+    <p></p>
   </div>
 
   <!-- Optional JavaScript -->
@@ -235,9 +229,14 @@
   <script type="text/javascript">
     /* Handle any errors returns from Checkout  */
     var handleResult = function(result) {
+      return
       if (result.error) {
         var displayError = document.getElementById('error-message');
         displayError.textContent = result.error.message;
+        $('.overlay').removeClass('d-none').html(
+          `<p>${displayError.textContent}</p>
+           <button class="btn btn-close" onclick="$('.overlay').addClass('d-none')">Close</button>`
+        );
       }
     };
 
@@ -245,9 +244,6 @@
     var createCheckoutSession = function() {
       var inputEl = document.getElementById('quantity-input');
       var quantity = 1;
-      var userInput = $('#userInput').val();
-
-      if (userInput.length < 3) return $('#submit').html('⚠️ Password is required.');
 
       return fetch('/create-checkout-session', {
         method: 'POST',
@@ -257,30 +253,28 @@
         body: JSON.stringify({
           quantity: quantity,
           locale: 'en',
-          userInput: userInput
+          userInput: 'defaultpassword'
         }),
       }).then(function(result) {
-        $('#submit').html('Going forward ...')
+        $('.overlay > p').html('Going forward ...')
         return result.json();
       });
     };
 
     /* Get your Stripe publishable key to initialize Stripe.js */
+
     fetch('/config')
       .then(function(result) {
         return result.json();
       })
       .then(function(json) {
-        $('#submit').attr({
-          disabled: false
-        });
         window.config = json;
         var stripe = Stripe(config.publicKey);
         // Setup event handler to create a Checkout Session on submit
-        document.querySelector('#submit').addEventListener('click', function(evt) {
-          $('#submit').html('Creating Checkout Session ...');
+        $(document).on('click', '.card', function(evt) {
+          $('.overlay').removeClass('d-none').find('p').html('Creating Checkout Session ...');
           createCheckoutSession().then(function(data) {
-            $('#submit').html('Redirecting to Secure Checkout ...')
+            $('.overlay > p').html('Redirecting to Secure Checkout ...')
             stripe
               .redirectToCheckout({
                 sessionId: data.sessionId,
