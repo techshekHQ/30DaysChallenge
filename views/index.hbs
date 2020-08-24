@@ -9,36 +9,54 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <style media="screen">
+    body {
+      background-color: black;
+    }
+
+    .container {
+      padding: 10px;
+      padding-bottom: 1rem;
+    }
+
     .display-2 {
       font-size: 3.5rem;
       font-weight: 300;
-      line-height: 1.2;
-      margin-bottom: 2rem;
-
-      background: lightcoral;
-      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 3px;
+      background: white;
       padding: 20px;
-      color: white;
-      font-weight: bold;
-      border-radius: 8px;
+      color: black;
+      font-weight: 600;
+      border: 1px solid white;
+      border-radius: 0%;
+    }
+
+    .display-2 span {
+      font-weight: 200;
     }
 
     .display-2 .btn-bold {
       font-size: 1rem;
       padding: 11px 9px;
-      border: 1px solid white;
+      border: 2px solid black;
       display: inline-block;
-      background: white;
-      color: lightcoral;
+      background: black;
+      color: white;
+      font-weight: 400;
+      white-space: nowrap;
     }
 
     .display-2 .btn-normal {
       font-size: 1rem;
       padding: 11px 9px;
-      border: 1px solid white;
+      border: 2px solid black;
       display: inline-block;
-      background: lightcoral;
-      color: white;
+      background: white;
+      color: black;
+      font-weight: 400;
+      display: block;
+      width: fit-content;
+      margin-top: 4px;
     }
 
     .grid {
@@ -51,6 +69,8 @@
     .card {
       padding: 1.5rem;
       border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 0;
+      font-weight: 100;
     }
 
     .card:hover {
@@ -69,6 +89,7 @@
 
     .card>h1 {
       font-size: 1.2rem;
+      font-weight: 200;
     }
 
     .btn-payment {
@@ -120,6 +141,10 @@
       display: inline-block;
     }
 
+    .d-xx-none {
+      display: none;
+    }
+
     /* @media (max-width: 1200px) {
       .grid {
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -130,12 +155,17 @@
       .grid {
         grid-template-columns: 1fr 1fr 1fr;
       }
-    }
+    }*/
 
-    @media (max-width: 579px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      } */
+    @media (max-width: 450px) {
+
+      .display-2 {
+        font-size: 9vh;
+      }
+
+      .d-xx-none {
+        display: inline-block;
+      }
     }
   </style>
   <title>Hello, world!</title>
@@ -145,9 +175,18 @@
 
   {{> menu}}
 
-  <div class="container pt-4">
+  <div class="container">
 
-    <h1 class="display-2">Start 30 days challenge to gain control of your Life ! <br>
+    <!-- <h1 class="display-2">Start <span style="
+    color: red;
+    font-weight: 200;
+">30 days challenge</span> to gain control <br> of your <br> Life ! <br>
+      <a class="btn-bold" href="/challenge">Continue with my Challenge</a>
+      <a class="btn-normal" href="https://techshek.circle.so">Jump to the Community</a>
+    </h1> -->
+
+    <h1 class="display-2">
+      Start <span>30 days challenge</span> to gain control <br class="d-xx-none"> of your <br class="d-xx-none"> Life ! <br>
       <a class="btn-bold" href="/challenge">Continue with my Challenge</a>
       <a class="btn-normal" href="https://techshek.circle.so">Jump to the Community</a>
     </h1>
