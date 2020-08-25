@@ -10,35 +10,43 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
   <style media="screen">
+    body {
+      background-color: black;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
     .box-grid {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(5, 1fr);
-      height: 100vh;
+      width: 97vw;
+      grid-template-columns: repeat(auto-fill, minmax(13vw, 1fr));
     }
 
     .box-grid .card {
-      height: 100%;
-      font-size: 7rem;
-      font-weight: bold;
+      height: 19vh;
+      font-size: 8vh;
+      font-weight: 100;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: lightcoral;
+      color: #565656;
       border-radius: 0px;
       box-sizing: border-box;
-      min-width: 200px;
-      border: 1px solid transparent;
+      border: 1px solid rgb(246 246 246);
     }
 
     .box-grid .card:not(.locked):hover {
-      background: lightcoral;
-      color: white;
+      background: #eaeaea;
       cursor: pointer;
+      color: black;
     }
 
     textarea {
@@ -114,7 +122,7 @@
     }
 
     .card.locked img {
-      width: 55%;
+      width: 11vh;
       opacity: 1;
       max-width: 110px;
     }
@@ -145,7 +153,7 @@
       justify-content: center;
     }
 
-    @media (max-width: 1272px) {
+    /* @media (max-width: 1272px) {
       .box-grid {
         grid-template-columns: repeat(5, 1fr);
         height: auto;
@@ -170,13 +178,23 @@
 
     @media (max-width: 800px) {
       .box-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
 
-    @media (max-width: 600px) {
+      }
+    } */
+
+    @media (orientation: portrait) {
       .box-grid {
-        grid-template-columns: repeat(2, 1fr);
+        min-width: 95vw;
+        grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+      }
+
+      .box-grid .card {
+        height: 12vh;
+        font-size: 5vh;
+      }
+
+      .card.locked img {
+        height: 7vh;
       }
     }
   </style>
@@ -193,7 +211,6 @@
       {{#if this.past}}
 
         <div class="card locked past feeling-{{this.feelingType}}">
-          <p>{{this.number}}</p>
           <img src="{{this.feeling}}" alt="" data-linked="{{this.comment}}">
         </div>
 
@@ -202,7 +219,7 @@
       {{#if this.present}}
 
         <div class="card" data-toggle="modal" data-target="#staticBackdrop">
-          <p>{{this.number}}</p>
+          <p class="m-auto">{{this.number}}</p>
         </div>
 
       {{/if}}
@@ -211,7 +228,7 @@
 
         <div class="card locked future">
           <img src="/emojis/padlock.svg" alt="">
-          <p>{{this.number}}</p>
+          <p class="m-auto">{{this.number}}</p>
         </div>
 
       {{/if}}
