@@ -7,7 +7,7 @@
     width: 100vw;
     height: 100vh;
     background: black;
-    padding: 0 20px;
+    padding: 0 1rem;
   }
 
   .menu {
@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: auto;
+margin-left: auto;
   }
 
   .menu .grid {
@@ -130,7 +130,13 @@
     border-radius: 0%;
     padding: 3px 0px;
     color: black;
+    margin-left: auto;
   }
+
+  .mb-68px {
+    margin-bottom: 68px;
+  }
+
 </style>
 
 <button class="menu-btn btn" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">
@@ -141,49 +147,10 @@
 
   <div class="menu">
 
-    <!-- <div class="grid">
-      <div class="card">
-        <img src="/sun.svg" alt="">
-        <h5>Profile</h5>
-        <small>Update your name, email or password</small>
-      </div>
-
-      <div class="card">
-        <img src="/html.svg" alt="">
-        <h5>Purchases</h5>
-        <small>Update / view your purchases / subscriptions made to techshek</small>
-      </div>
-
-      <div class="card">
-        <img src="/sajadah.svg" alt="">
-        <h5>Payments</h5>
-        <small>Update your payment methods / credit card details</small>
-      </div>
-
-      <div class="card">
-        <img src="/calm.svg" alt="">
-        <h5>Community</h5>
-        <small>Socialize with people of products</small>
-      </div>
-
-      <div class="card">
-        <img src="/muscle.svg" alt="">
-        <h5>Challenges</h5>
-        <small>View your 30 Days Challenges / Log your activity</small>
-      </div>
-
-      <div class="card">
-        <img src="/homework.svg" alt="">
-        <h5>Event</h5>
-        <small>Our next event is planned on 6 September 2020 · Your ticket is purchased !</small>
-      </div>
-
-    </div> -->
-
-    <h1><a href="/">Home</a> </h1>
+    <h1 class="mt-auto"><a href="/">Home</a> </h1>
     <h1><a href="/profile">Profile</a> </h1>
     <h1><a href="/challenges">Challenges</a> </h1>
-    <h1><a href="#">Log Out</a> </h1>
+    <h1 class="mb-68px"><a href="#">Log Out</a> </h1>
     <!-- <h1 onclick="$('.menu-container').toggleClass('d-none')"><a href="#">Close Menu</a> </h1> -->
 
 
