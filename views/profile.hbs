@@ -12,9 +12,27 @@
 
   <title></title>
   <style media="screen">
+    body {
+      background: black;
+      display: flex;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+      padding-top: 0;
+      padding-bottom: 15px;
+
+      max-width: 900px;
+    }
 
     .block {
-      max-width: 500px;
+      max-width: 400px;
     }
 
     input {
@@ -23,8 +41,31 @@
       padding: 1rem 1rem 0.5rem 1rem;
       display: block;
       width: 100%;
-      margin-bottom: 1rem;
-      color: grey;
+      margin-bottom: 4px;
+      color: black;
+      font-size: 1.3rem;
+      font-weight: 100;
+    }
+
+    form .btn-submit {
+      color: black;
+      background-color: white;
+      border-color: white;
+      border-radius: 0%;
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-height: 630px) {
+      body {
+        align-items: flex-start;
+        height: auto;
+      }
     }
   </style>
 </head>
@@ -34,44 +75,6 @@
   {{> menu}}
   <div class="container">
 
-    <!-- <div class="grid">
-      <div class="card">
-        <img src="/sun.svg" alt="">
-        <h5>Profile</h5>
-        <small>Update your name, email or password</small>
-      </div>
-
-      <div class="card">
-        <img src="/html.svg" alt="">
-        <h5>Purchases</h5>
-        <small>Update / view your purchases / subscriptions made to techshek</small>
-      </div>
-
-      <div class="card">
-        <img src="/sajadah.svg" alt="">
-        <h5>Payments</h5>
-        <small>Update your payment methods / credit card details</small>
-      </div>
-
-      <div class="card">
-        <img src="/calm.svg" alt="">
-        <h5>Community</h5>
-        <small>Socialize with people of products</small>
-      </div>
-
-      <div class="card">
-        <img src="/muscle.svg" alt="">
-        <h5>Challenges</h5>
-        <small>View your 30 Days Challenges / Log your activity</small>
-      </div>
-
-      <div class="card">
-        <img src="/homework.svg" alt="">
-        <h5>Event</h5>
-        <small>Our next event is planned on 6 September 2020 · Your ticket is purchased !</small>
-      </div>
-    </div> -->
-
     <div class="card special">
       <h1>Hey 👋, Qasim !</h1>
       <p>Make necessary edits and hit Save below. Happy Changing.</p>
@@ -79,7 +82,8 @@
     <form class="block" action="/profile" method="post">
       <input type="text" name="" value="Qasim Ali">
       <input type="text" name="" value="qasimali24@gmail.com">
-      <input type="text" name="" value="Password">
+      <input type="text" name="" value="Old Password">
+      <input type="text" name="" value="New Password">
       <input type="text" name="" value="Confirm Password">
 
       <button class="btn btn-submit" type="submit" name="button">Save</button>

@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-margin-left: auto;
+    margin-left: auto;
   }
 
   .menu .grid {
@@ -107,20 +107,23 @@ margin-left: auto;
   }
 
   .card.special {
-    color: white;
-    background: lightcoral;
     padding: 1rem;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 4px;
+    border-radius: 0%;
+    background: white;
+    color: black;
+    max-width: 800px;
   }
 
   .card.special h1 {
     font-size: 2.5rem;
-    font-weight: bolder;
+    font-weight: 100;
   }
 
   .card.special p {
-    /* font-size: 1.3rem; */
+    font-size: 1.3rem;
+    font-weight: 200;
   }
 
   .menu h1 {
@@ -136,7 +139,6 @@ margin-left: auto;
   .mb-68px {
     margin-bottom: 68px;
   }
-
 </style>
 
 <button class="menu-btn btn" type="button" name="button" onclick="$('.menu-container').toggleClass('d-none')">
