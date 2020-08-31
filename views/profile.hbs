@@ -77,15 +77,22 @@
 
     <div class="card special">
       <h1>Hey 👋, Qasim !</h1>
+      {{#if msg}}
+      <p>{{msg}}</p>
+      {{else}}
       <p>Make necessary edits and hit Save below. Happy Changing.</p>
+      {{/if}}
     </div>
     <form class="block" action="/profile" method="post">
       <input type="text" name="" value="Qasim Ali">
       <input type="text" name="" value="qasimali24@gmail.com">
+      {{#unless verified}}
+      <p><small>Your email verification is pending.</small></p>
+      <button type="button" name="button">Resend Verification</button>
+      {{/unless}}
       <input type="text" name="" value="Old Password">
       <input type="text" name="" value="New Password">
       <input type="text" name="" value="Confirm Password">
-
       <button class="btn btn-submit" type="submit" name="button">Save</button>
     </form>
 

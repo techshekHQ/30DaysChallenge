@@ -32,7 +32,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/success', (req, res) => {
-  res.status(200).render('success.hbs');
+  res.status(200).render('profile.hbs', {
+    msg: 'Please create a password against your name and email.',
+    email_note: 'Verification is pending.'
+  });
 })
 
 app.get('/challenge', (req, res) => {
@@ -163,18 +166,18 @@ app.post('/create-checkout-session', async (req, res) => {
   // For full details see https://stripe.com/docs/api/checkout/sessions/create
   const session = await stripe.checkout.sessions.create({
     payment_method_types: process.env.PAYMENT_METHODS.split(', '),
-    mode: 'payment',
+    mode: 'subscription',
     locale: locale,
     line_items: [{
       price: process.env.PRICE,
       quantity: quantity
     }],
     // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-    payment_intent_data: {
-      metadata: {
-        userInput: userInput
-      },
-    },
+    // payment_intent_data: {
+    //   metadata: {
+    //     userInput: userInput
+    //   },
+    // },
     success_url: `${domainURL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${domainURL}/`,
   });
